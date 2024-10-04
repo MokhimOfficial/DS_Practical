@@ -1,0 +1,253 @@
+21. Write a python program implement a preorder traversal of a binary tree
+tree = ["A", ["B", ["D", [], []], ["E", [], []]], ["C", ["F", [], []], ["G", [], []]]]
+stack = [tree]
+while stack:
+    node = stack.pop()
+    if node:
+        print(node[0], end=' ')
+        stack.extend([node[2], node[1]])
+22. Write a python program for forward traversal in doubly linked list.
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.prev = None
+        self.next = None
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+    def append(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+        else:
+            last = self.head
+            while last.next:
+                last = last.next
+            last.next = new_node
+            new_node.prev = last
+    def forward_traversal(self):
+        current = self.head
+        while current:
+            print(current.data, end=" -> ")
+            current = current.next
+        print("None")
+dll = DoublyLinkedList()
+dll.append(1)
+dll.append(2)
+dll.append(3)
+dll.forward_traversal()
+23. Write a Python program to search in binary search tree.
+class Node:
+    def __init__(self, key):
+        self.left = None
+        self.right = None
+        self.val = key
+def search(root, key):
+    if root is None or root.val == key:
+        return root
+    if key < root.val:
+        return search(root.left, key)
+    return search(root.right, key)
+root = Node(10)
+root.left = Node(5)
+root.right = Node(20)
+key = 5
+result = search(root, key)
+if result:
+    print(f"Key {key} found in the tree")
+else:
+    print(f"Key {key} not found in the tree")
+24. Write a Python program which accepts the string and check whether the string is palindrome or not using stack
+class Stack:
+    def __init__(self):
+        self.stack = []
+    def push(self, item):
+        self.stack.append(item)
+    def pop(self):
+        return self.stack.pop()
+    def is_empty(self):
+        return len(self.stack) == 0
+def is_palindrome(s):
+    stack = Stack()
+    for char in s:
+        stack.push(char)
+    reversed_s = ''
+    while not stack.is_empty():
+        reversed_s += stack.pop()
+    return s == reversed_s
+s = input("Enter a string to check if it's a palindrome: ")
+if is_palindrome(s):
+    print(f"{s} is a palindrome")
+else:
+    print(f"{s} is not a palindrome")
+25. Write a python program to create a Binary tree. Check whether it is a BST or not
+class Node:
+    def __init__(self, key):
+        self.left = None
+        self.right = None
+        self.val = key
+def is_bst(root, left=None, right=None):
+    if root is None:
+        return True
+    if left is not None and root.val <= left.val:
+        return False
+    if right is not None and root.val >= right.val:
+        return False
+    return is_bst(root.left, left, root) and is_bst(root.right, root, right)
+root = Node(10)
+root.left = Node(5)
+root.right = Node(20)
+print(f"Is the tree a BST? {'Yes' if is_bst(root) else 'No'}")
+26. Write a python program to find maximum element from queue using linked list.
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+class Queue:
+    def __init__(self):
+        self.front = self.rear = None
+    def enqueue(self, item):
+        new_node = Node(item)
+        if self.rear is None:
+            self.front = self.rear = new_node
+            return
+        self.rear.next = new_node
+        self.rear = new_node
+    def find_max(self):
+        if self.front is None:
+            return None
+        max_val = self.front.data
+        current = self.front
+        while current:
+            if current.data > max_val:
+                max_val = current.data
+            current = current.next
+        return max_val
+q = Queue()
+q.enqueue(10)
+q.enqueue(20)
+q.enqueue(5)
+print(f"Maximum element in the queue: {q.find_max()}")
+
+27. Write a Python program to delete the last item from a singly linked list
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+    def append(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+        else:
+            last = self.head
+            while last.next:
+                last = last.next
+            last.next = new_node
+    def delete_last(self):
+        if self.head is None:
+            print("List is empty")
+            return
+        if self.head.next is None:
+            self.head = None
+            return
+        second_last = self.head
+        while second_last.next.next:
+            second_last = second_last.next
+        second_last.next = None
+    def display(self):
+        current = self.head
+        while current:
+            print(current.data, end=" -> ")
+            current = current.next
+        print("None")
+ll = SinglyLinkedList()
+ll.append(10)
+ll.append(20)
+ll.append(30)
+print("Before deleting the last item:")
+ll.display()
+ll.delete_last()
+print("After deleting the last item:")
+ll.display()
+28. Write a Python program to reverse each word of the string by using static and dynamic implementation of stack.
+def reverse_words_static(s):
+    words = s.split(' ')
+    reversed_words = []
+    for word in words:
+        stack = list(word)
+        reversed_word = ''
+        while stack:
+            reversed_word += stack.pop()
+        reversed_words.append(reversed_word)
+    return ' '.join(reversed_words)
+class Stack:
+    def __init__(self):
+        self.stack = []
+    def push(self, item):
+        self.stack.append(item)
+    def pop(self):
+        return self.stack.pop()
+    def is_empty(self):
+        return len(self.stack) == 0
+def reverse_words_dynamic(s):
+    words = s.split(' ')
+    reversed_words = []
+    for word in words:
+        stack = Stack()
+        for char in word:
+            stack.push(char)
+        reversed_word = ''
+        while not stack.is_empty():
+            reversed_word += stack.pop()
+        reversed_words.append(reversed_word)
+    return ' '.join(reversed_words)
+s = input("Enter a string: ")
+print(f"Reversed words (static stack): {reverse_words_static(s)}")
+print(f"Reversed words (dynamic stack): {reverse_words_dynamic(s)}")
+29. Write a Python program to delete the last item from a singly linked list.
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+    def append(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+        else:
+            last = self.head
+            while last.next:
+                last = last.next
+            last.next = new_node
+    def delete_last(self):
+        if self.head is None:
+            print("List is empty")
+            return
+        if self.head.next is None:
+            self.head = None
+            return
+        second_last = self.head
+        while second_last.next.next:
+            second_last = second_last.next
+        second_last.next = None
+    def display(self):
+        current = self.head
+        while current:
+            print(current.data, end=" -> ")
+            current = current.next
+        print("None")
+ll = SinglyLinkedList()
+ll.append(10)
+ll.append(20)
+ll.append(30)
+print("Before deleting the last item:")
+ll.display()
+ll.delete_last()
+print("After deleting the last item:")
+ll.display()
+

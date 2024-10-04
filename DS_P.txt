@@ -1,0 +1,466 @@
+Sorting
+Q.1 Write a Python program to sort a list of elements using the bubble sort. Algorithm takes input from user.
+elements = input("Enter the list of elements (separated by space): ").split()
+elements = [int(x) for x in elements]
+print("Original List:")
+print(elements)
+n = len(elements)
+for i in range(n-1):
+    for j in range(n-i-1):
+        if elements[j] > elements[j+1]:
+            elements[j], elements[j+1] = elements[j+1], elements[j]
+print("Sorted List:")
+print(elements)
+2) Write a Python program to sort a list of elements using insertion sort      algorithm take input from user.              
+elements = input("Enter the list of elements (separated by space): ").split()
+elements = [int(x) for x in elements]
+print("Original List:")
+print(elements)
+for i in range(1, len(elements)):
+    key = elements[i]
+    j = i-1
+    while j >= 0 and key < elements[j]:
+        elements[j+1] = elements[j]
+        j -= 1
+    elements[j+1] = key
+print("Sorted List:")
+print(elements)
+3) Write a Python program to sort a list of elements using Quick sort      algorithm take input from user.
+elements = input("Enter the list of elements (separated by space): ").split()
+elements = [int(x) for x in elements]
+print("Original List:")
+print(elements)
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quick_sort(left) + middle + quick_sort(right)
+sorted_elements = quick_sort(elements)
+print("Sorted List:")
+print(sorted_elements)
+ 4) Write a Python program to sort a list of elements using Merge sort. algorithm take input from user.
+elements = input("Enter elements separated by space: ")
+elements = list(map(int, elements.split()))
+def merge(left, right):
+    result = []
+    i, j = 0, 0
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    result += left[i:]
+    result += right[j:]
+    return result
+def merge_sort(elements):
+    if len(elements) <= 1:
+        return elements
+    mid = len(elements) // 2
+    left = elements[:mid]
+    right = elements[mid:]
+    left = merge_sort(left)
+    right = merge_sort(right)
+    return merge(left, right)
+sorted_elements = merge_sort(elements)
+print("Sorted list: ", sorted_elements) 
+Linked List:
+1. Write a python Program to demonstrate Traversal Operation in Linked List 
+head = {'data': 1, 'next': None}
+node2 = {'data': 2, 'next': None}
+node3 = {'data': 3, 'next': None}
+node4 = {'data': 4, 'next': None}
+head['next'] = node2
+node2['next'] = node3
+node3['next'] = node4
+def traverse(head):
+    current = head
+    while current:
+        print(current['data'], end=" ")
+        current = current['next']
+    print()
+traverse(head)
+  Output: Linked List: 1 2 3 4
+2.Write a python Program to demonstrate Doubly Linked List 
+head = {'data': 1, 'prev': None, 'next': None}
+node2 = {'data': 2, 'prev': head, 'next': None}
+node3 = {'data': 3, 'prev': node2, 'next': None}
+node4 = {'data': 4, 'prev': node3, 'next': None}
+head['next'] = node2
+node2['next'] = node3
+node3['next'] = node4
+current = head
+while current:
+    print(current['data'], end=" <-> " if current['next'] else "")
+    current = current['next']
+print("None")
+current = node4
+while current:
+    print(current['data'], end=" <-> " if current['prev'] else "")
+    current = current['prev']
+print("None")
+3.Write a python program to implement delete operation.
+head = {'data': 1, 'next': {'data': 2, 'next': {'data': 3, 'next': {'data': 4, 'next': None}}}}
+current = head
+while current['next']:
+    if current['next']['data'] == 3:
+        current['next'] = current['next']['next']
+        break
+    current = current['next']
+while head:
+    print(head['data'], end=" ")
+    head = head['next']
+print()
+4.Write a Python program to implement push operation.
+stack = []
+stack.append(1)
+stack.append(2)
+stack.append(3)
+stack.append(4)
+print("Original Stack:")
+print(stack)
+stack.append(5)
+print("Stack after push:")
+print(stack)
+
+
+5.Write a Python program to implement Peek operation.
+def stack_operations(stack):
+    stack.append(1)
+    stack.append(2)
+    stack.append(3)
+    stack.append(4)
+    print("Original Stack:")
+    print(stack)
+    top_element = stack[-1]
+    print("Top element of the stack (Peek):")
+    print(top_element)
+stack = []
+stack_operations(stack)
+6.Write Python Program to implement isfull() operation in stack.
+stack = []
+max_size = 5
+stack.append(1)
+stack.append(2)
+stack.append(3)
+stack.append(4)
+print("Original Stack:")
+print(stack)
+# Check if the stack is full
+if len(stack) == max_size:
+    print("Stack is full.")
+else:
+    print("Stack is not full.")
+Stack
+1. Write a python program to implement push() operation.
+stack = []
+max_size = 5  # Define the maximum size of the stack
+element = int(input("Enter an element to push: "))
+if len(stack) < max_size:
+    stack.append(element)
+    print("Element pushed:", element)
+    print("Stack:", stack)
+else:
+    print("Stack is full. Cannot push element.")
+
+
+2.Write a python program to implement pop() operation.
+stack = [10, 20, 30, 40, 50]  # Initialize the stack with some elements
+if len(stack) > 0:
+    popped_element = stack.pop()
+    print("Popped element:", popped_element)
+    print("Stack:", stack)
+else:
+    print("Stack is empty. Cannot pop element.")
+3. Write a python program to implement isEmpty() operation 
+stack = []  
+if len(stack) == 0:
+    print("Stack is empty.")
+else:
+    print("Stack is not empty.")
+4. Write a python program to implement isFull() operation 
+max_capacity = 5
+stack = [10, 20, 30, 40, 50]  
+if len(stack) == max_capacity:
+    print("Stack is full.")
+else:
+    print("Stack is not full.")
+5. Write a Python program that implements the peek() operation.
+stack = [10, 20, 30, 40, 50]  
+if len(stack) == 0:
+    print("Stack is empty. Cannot peek.")
+else:
+    top_element = stack[-1]
+    print("Top element of the stack:", top_element)
+6. Write a Python program that implements the infix to postfix operation
+precedence = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3}
+infix_expression = "A+B*C-D/E"
+postfix_expression = ""
+operator_stack = []
+
+for char in infix_expression:
+    if char.isalpha(): postfix_expression += char
+    elif char in precedence:
+        while operator_stack and operator_stack[-1] != '(' and precedence[operator_stack[-1]] >= precedence[char]:
+            postfix_expression += operator_stack.pop()
+        operator_stack.append(char)
+    elif char == '(': operator_stack.append(char)
+    elif char == ')':
+        while operator_stack and operator_stack[-1] != '(':
+            postfix_expression += operator_stack.pop()
+        if operator_stack and operator_stack[-1] == '(': operator_stack.pop()
+while operator_stack: postfix_expression += operator_stack.pop()
+print("Postfix expression:", postfix_expression)
+7. Write a Python program that implements the infix to prefix operation
+precedence = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3}
+infix_expression = "A+B*C-D/E"
+prefix_expression = ""
+operator_stack = []
+for char in infix_expression[::-1]:
+    if char.isalpha(): prefix_expression = char + prefix_expression
+    elif char in precedence:
+        while operator_stack and operator_stack[-1] != '(' and precedence[operator_stack[-1]] > precedence[char]:
+            prefix_expression = operator_stack.pop() + prefix_expression
+        operator_stack.append(char)
+    elif char == ')': operator_stack.append('(')
+    elif char == '(': 
+        while operator_stack and operator_stack[-1] != ')':
+            prefix_expression = operator_stack.pop() + prefix_expression
+        if operator_stack and operator_stack[-1] == '(': operator_stack.pop()
+while operator_stack: prefix_expression = operator_stack.pop() + prefix_expression
+print("Prefix expression:", prefix_expression)
+
+
+
+Queue
+1. Python program that implements the enqueue() operation.
+queue = []
+def enqueue(item):
+    queue.append(item)
+enqueue("Apple")
+enqueue("Banana")
+enqueue("Cherry")
+print("Queue:", queue)
+2. Python program that implements the dequeue() operation.
+queue = ["Apple", "Banana", "Cherry"]
+dequeued_item = queue.pop(0)
+print("Dequeued item:", dequeued_item)
+print("Queue:", queue)
+3. Write a Python program that implements the isEmpty() operation.
+queue = []
+def is_empty():
+    return len(queue) == 0
+queue.append("Apple")
+queue.append("Banana")
+queue.append("Cherry")
+print("Is queue empty?", is_empty())
+queue.pop(0)
+queue.pop(0)
+print("Is queue empty?", is_empty())
+4. Write Python program that implements the isFull() operation
+queue = [None] * 5  
+print("Is queue full?", len([x for x in queue if x is not None]) == len(queue))
+queue[0] = "Apple"
+queue[1] = "Banana"
+queue[2] = "Cherry"
+print("Is queue full?", len([x for x in queue if x is not None]) == len(queue))
+queue[3] = "Date"
+queue[4] = "Elderberry"
+print("Is queue full?", len([x for x in queue if x is not None]) == len(queue))
+5. Write a Python program that implements the peek() operation
+queue = []
+queue.append("Apple")
+queue.append("Banana")
+queue.append("Cherry")
+print("Front element:", queue[0] if queue else "Queue is empty")
+queue.pop(0)
+print("Front element:", queue[0] if queue else "Queue is empty")
+6. Write a Python program that implements the Circular Queue.
+queue = [None] * 5  
+front = 0
+rear = 0
+def enqueue(element):
+    global rear
+    queue[rear] = element
+    rear = (rear + 1) % len(queue)
+def dequeue():
+    global front
+    element = queue[front]
+    queue[front] = None
+    front = (front + 1) % len(queue)
+    return element
+enqueue("Apple")
+enqueue("Banana")
+enqueue("Cherry")
+enqueue("Date")
+enqueue("Elderberry")
+print("Queue:", queue)
+print("Dequeued:", dequeue())
+print("Queue:", queue)
+enqueue("Fig")
+print("Queue:", queue)
+
+7. Write a Python program that implements a Priority Queue.
+import heapq
+pq = []
+heapq.heappush(pq, (3, "Low priority task"))
+heapq.heappush(pq, (1, "High priority task"))
+heapq.heappush(pq, (2, "Medium priority task"))
+print("Priority Queue:", pq)
+element = heapq.heappop(pq)
+print("Dequeued:", element)
+print("Priority Queue:", pq)
+heapq.heappush(pq, (4, "Lowest priority task"))
+print("Priority Queue:", pq)
+8. Write a Python program that implements a Double Ended Queue
+from collections import deque
+dq = deque()
+dq.append("Apple")
+dq.append("Banana")
+dq.append("Cherry")
+print("Deque:", dq)
+dq.appendleft("Date")
+print("Deque:", dq)
+element = dq.pop()
+print("Removed from right:", element)
+print("Deque:", dq)
+element = dq.popleft()
+print("Removed from left:", element)
+print("Deque:", dq)
+
+
+
+
+
+
+
+Tree
+1. Write a Python program to create a Binary Tree.
+root = ["A", ["B", ["D", [], []], ["E", [], []]], ["C", ["F", [], []], ["G", [], []]]]
+def print_tree(node, level=0):
+    print("  " * level + node[0])
+    if node[1]: print_tree(node[1], level + 1)
+    if node[2]: print_tree(node[2], level + 1)
+print_tree(root)
+2. Write a Python program that implements the create operation.
+def create_tree(value, left=None, right=None):
+    return [value, left, right]
+root = create_tree("A", create_tree("B", create_tree("D"), create_tree("E")), create_tree("C", create_tree("F"), create_tree("G")))
+print(root)
+3. Write a Python program that implements the insert operation.
+root = ["A", ["B", ["D", [], []], ["E", [], []]], ["C", ["F", [], []], ["G", [], []]]]
+def insert_tree(node, value):
+    if value < node[0]:
+        if node[1]: insert_tree(node[1], value)
+        else: node[1] = [value, [], []]
+    else:
+        if node[2]: insert_tree(node[2], value)
+        else: node[2] = [value, [], []]
+insert_tree(root, "H")
+print(root)
+4. Write a Python program that implements the delete operation
+def delete_tree(node, value):
+    if node is None or not node:
+        return None
+    if value < node[0]:
+        node[1] = delete_tree(node[1], value)
+    elif value > node[0]:
+        node[2] = delete_tree(node[2], value)
+    else:
+        if not node[1]:  # No left subtree
+            return node[2]
+        elif not node[2]:  # No right subtree
+            return node[1]
+        temp = node[2]
+        while temp[1]:  # Move to the leftmost node in the right subtree
+            temp = temp[1]
+        node[0] = temp[0]
+        node[2] = delete_tree(node[2], temp[0])
+    return node
+Tree structure: ["A", ["B", ["D", [], []], ["E", [], []]], ["C", ["F", [], []], ["G", [], []]]]
+root = ["A", ["B", ["D", [], []], ["E", [], []]], ["C", ["F", [], []], ["G", [], []]]]
+root = delete_tree(root, "B")
+print(root)
+5. Write a python program implement a preorder traversal of a binary tree
+tree = ["A", ["B", ["D", [], []], ["E", [], []]], ["C", ["F", [], []], ["G", [], []]]]
+stack = [tree]
+while stack:
+    node = stack.pop()
+    if node:
+        print(node[0], end=' ')
+        stack.extend([node[2], node[1]])
+6. Write a python program implement a inorder traversal of a binary tree
+tree = ["A", ["B", ["D", [], []], ["E", [], []]], ["C", ["F", [], []], ["G", [], []]]]
+stack, node = [], tree
+while stack or node:
+    while node:
+        stack.append(node)
+        node = node[1]
+    node = stack.pop()
+    print(node[0], end=' ')
+    node = node[2]
+
+
+
+7. Write a python program implement a postorder traversal of a binary tree
+tree = ["A", ["B", ["D", [], []], ["E", [], []]], ["C", ["F", [], []], ["G", [], []]]]
+stack, output = [tree], []
+while stack:
+    node = stack.pop()
+    if node:
+        output.append(node[0])
+        stack.extend([node[1], node[2]])
+print(' '.join(output[::-1]))
+8. write a python program to Counting leaf in binary tree 
+tree = ["A", ["B", ["D", [], []], ["E", [], []]], ["C", ["F", [], []], ["G", [], []]]]
+stack, leaf_count = [tree], 0
+while stack:
+    node = stack.pop()
+    if node:
+        if not node[1] and not node[2]:
+            leaf_count += 1
+        stack.extend([node[1], node[2]])
+print(leaf_count)
+9. write a python program to Counting leaf in binary tree
+tree = ["A", ["B", ["D", [], []], ["E", [], []]], ["C", ["F", [], []], ["G", [], []]]]
+stack, non_leaf_count = [tree], 0
+while stack:
+    node = stack.pop()
+    if node and (node[1] or node[2]):
+        non_leaf_count += 1
+        stack.extend([node[1], node[2]])
+print(non_leaf_count)
+10. Write a python program to Count total number of nodes
+tree = ["A", ["B", ["D", [], []], ["E", [], []]], ["C", ["F", [], []], ["G", [], []]]]
+stack, total_nodes = [tree], 0
+while stack:
+    node = stack.pop()
+    if node:
+        total_nodes += 1
+        stack.extend([node[1], node[2]])
+print(total_nodes)
+11.  Write a python program to implement Heapsort in tree
+      def heapsort(arr):
+    for i in range(len(arr) // 2 - 1, -1, -1):
+        heapify(arr, len(arr), i)
+    for i in range(len(arr) - 1, 0, -1):
+        arr[0], arr[i] = arr[i], arr[0]
+        heapify(arr, i, 0)
+def heapify(arr, n, i):
+    largest, l, r = i, 2 * i + 1, 2 * i + 2
+    if l < n and arr[l] > arr[largest]: largest = l
+    if r < n and arr[r] > arr[largest]: largest = r
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)
+arr = [4, 10, 3, 5, 1]
+heapsort(arr)
+print(arr)
+
+
+     
+
